@@ -21,7 +21,7 @@ FROM openjdk:8-jre
 # Install dependencies
 RUN set -ex; \
   apt-get update; \
-  apt-get -y install libsnappy1v5 gettext-base; \
+  apt-get -y install libsnappy1v5 gettext-base procps net-tools vim telnet ; \
   rm -rf /var/lib/apt/lists/*
 
 # Grab gosu for easy step-down from root
@@ -81,6 +81,15 @@ RUN set -ex; \
   rm flink.tgz; \
   \
   chown -R flink:flink .;
+### 设置PS1和别名
+RUN echo "alias ll='ls -alF'" >> /etc/profile  && \
+    echo "alias ls='ls --color=auto'" >> /etc/profile &&  \
+    echo "alias grep='grep --color=auto'" >> /etc/profile && \
+    echo "alias fgrep='fgrep --color=auto'" >> /etc/profile && \
+    echo "alias egrep='egrep --color=auto'" >> /etc/profile && \
+    echo "Asia/Shanghai" > /etc/timezone  && \
+    ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &&  \
+    source /etc/profile
 
 # Configure container
 COPY docker-entrypoint.sh /
