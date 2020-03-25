@@ -74,8 +74,7 @@ RUN echo "alias ll='ls -alF'" >> /etc/profile  && \
     echo "alias fgrep='fgrep --color=auto'" >> /etc/profile && \
     echo "alias egrep='egrep --color=auto'" >> /etc/profile && \
     echo "Asia/Shanghai" > /etc/timezone  && \
-    ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &&  \
-    source /etc/profile
+    ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &&  
 
 # Configure container
 COPY docker-entrypoint.sh /
